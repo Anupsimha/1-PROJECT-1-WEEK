@@ -12,12 +12,12 @@ const Navbar = () => {
         </div>
 
         <ul className="nav-feild">
-            <li>Dashboard</li>
-            <li>Messages</li>
-            <li>Company Profile</li>
-            <li>All Applicants</li>
-            <li>Job Listing</li>
-            <li>My Schedule</li>
+            <li><i class="fa-solid fa-house"></i>Dashboard</li>
+            <li><i class="fa-solid fa-message"></i>Messages</li>
+            <li><i class="fa-solid fa-building"></i>Company Profile</li>
+            <li><i class="fa-solid fa-users"></i>All Applicants</li>
+            <li><i class="fa-solid fa-clipboard"></i>Job Listing</li>
+            <li><i class="fa-solid fa-calendar"></i>My Schedule</li>
         </ul>
 
         <div className='border'></div>

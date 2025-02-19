@@ -1,6 +1,6 @@
 .navbar{
     height: 100vh;
-    width: 40vh;
+    max-width: 40vh;
     background: linear-gradient(to bottom , white , rgb(255, 240, 228));
     border-right: 1px solid rgb(165, 165, 165);
     background-color: #fff1e3;
@@ -33,7 +33,6 @@
     position: relative;
     top: 5px;
     right: 15px;
-    /* border-bottom: 4px solid red; */
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
 }
@@ -53,7 +52,7 @@
     height: 30%;
     position: relative;
     font-family: "Outfit", serif;
-    color: #4a4a4a;
+    color: #6a6969;
     top: -6%;
     display: flex;
     flex-direction: column;
@@ -64,12 +63,14 @@
 
 .nav-feild li{
     cursor: pointer;
-    transition: 0.5s ease-in-out;
-
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: 0.3s ease-in-out;
 }
 
 .nav-feild li:hover{
-    background-color: #ffb469;
+    color: #000000;
 }
 
 .border{
@@ -84,14 +85,14 @@
 .settings{
     height: 20%;
     font-family: "Outfit", serif;
-    color: #4a4a4a;
+    color: #6a6969;
     font-size: 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
     position: relative;
     top: 25%;
-    right: 7%;
+    right: 9%;
 }
 
 .settings-section, .settings-section2 {
@@ -99,4 +100,52 @@
     align-items: center;
     /* justify-content: center; */
     gap: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+.settings-section:hover{
+    color: #000000;
+}
+
+.settings-section2:hover{
+    color: #000000;
+}
+
+/* Responsive Design */
+
+@media((min-width:970px) and (max-width : 1024px)){
+    .navbar{
+        width: 20%;
+    }
+    .nav{
+        gap: 17px;
+    }
+    .about-web img{
+        height: 40px;
+        width: 50px;
+    }
+    .about-web h2{
+        font-size: 32px;
+        right: -5px;
+        top: 2px;
+    }
+    .nav-feild{
+        gap: 20px;
+        font-size: 17px;
+        right: 5%;
+    }
+    .border{
+        top: 54%;
+        left: 1%;
+    }
+    .settings{
+        gap: 15px;
+        font-size: 17px;
+        top: 22%;
+        right: 14%;
+    }
+}
+
+@media((min-width:768px) and (max-width : 970px)){
+    /* Add Sliding Navbar Feature */
 }

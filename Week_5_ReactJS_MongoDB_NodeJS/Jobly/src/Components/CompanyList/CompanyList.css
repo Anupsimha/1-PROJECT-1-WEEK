@@ -1,0 +1,98 @@
+.container-navbar{
+    height: 17%;
+    width: 81vw;
+    position: absolute;
+    top: 0;
+    left: 19vw;
+    border-bottom: 1px solid rgb(165, 165, 165);
+    display: flex;
+    align-items: center;
+    font-family: "Outfit", serif;
+    justify-content: space-between;
+    font-weight: 400;
+}
+
+.company-list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 20px;
+    line-height: 2.1em;
+}
+
+.company-list img{
+     height: 120px;
+     width: 120px;
+     cursor: pointer;
+}
+
+.company-details span{
+    color: rgb(165, 165, 165);
+    font-size: 20px;
+}
+
+.company-details p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* JOB POST */
+
+.job-post{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    gap: 45px;
+    position: relative;
+    right: 5%; 
+}
+
+.job-post .fa-bell{
+    transform: scale(1.6);
+    position: absolute;
+    right: 135%;
+    top: 40%;
+    cursor: pointer;
+}
+
+/*Button SVG*/
+/* From Uiverse.io by adamgiebl */ 
+button {
+    display: flex;
+    align-items: center;
+    font-family: inherit;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 17px;
+    padding: 0.8em 1.3em 0.8em 0.9em;
+    color: white;
+    background: #ad5389;
+    background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+    border: none;
+    letter-spacing: 0.05em;
+    border-radius: 5px;
+  }
+  
+  button svg {
+    margin-right: 3px;
+    transform: rotate(30deg);
+    transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+  
+  button span {
+    transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+  
+  button:hover svg {
+    transform: translateX(5px) rotate(90deg);
+  }
+  
+  button:hover span {
+    transform: translateX(7px);
+  }
+  
