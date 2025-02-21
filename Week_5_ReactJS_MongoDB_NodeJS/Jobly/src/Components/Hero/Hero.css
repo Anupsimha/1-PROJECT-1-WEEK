@@ -1,0 +1,139 @@
+.hero-container{
+    position: absolute;
+    top: 17%;
+    left: 19%;
+    height: 83vh;
+    width: 81vw;
+}
+
+.heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    font-family: 'Poppins' , sans-serif;
+    letter-spacing: 0.15em;
+}
+
+.heading h2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    color: rgb(125, 125, 125);
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.heading h2:hover{
+    color: #000000;
+}
+
+/*DROPDOWN CONTENT*/
+
+details {
+    position: relative;
+    right: 12%;
+    display: inline-block;
+    font-family: Arial, sans-serif;
+}
+
+summary {
+    cursor: pointer;
+    background-color: #6cb3ff;
+    color: white;
+    padding: 14px 11px;
+    border-radius: 5px;
+    list-style: none; /* Remove default triangle */
+    display: inline-block;
+    transition: 0.3s ease-in-out;
+}
+
+summary:hover{
+    background-color: #007bff;
+}
+
+details[open] summary {
+    background-color: #0056b3;
+}
+
+.dropdown-content {
+    position: absolute;
+    background-color: white;
+    min-width: 150px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 5px;
+    padding: 5px 0;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/*APPLICANT DETAILS*/
+
+.applicant{
+    height: 85%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+    font-family: 'Poppins' , sans-serif;
+}
+
+.applicant-details{
+    height: 100%;
+    width: 36%;
+    padding: 30px;
+    border: 1px solid rgb(125, 125, 125);
+    border-radius: 5px;
+}
+
+.applicant-profile{
+    background-color: #3e3e3e;
+    height: 100%;
+    width: 62%;
+}
+
+.appli{
+    height: 30%;
+    width: 110%;
+    padding: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.appli img{
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 15px 10px rgba(99, 99, 99, 0.3);
+}
+
+.appli-info{
+    line-height: 2.1em;
+}
+
+.fa-star{
+    color: gold;
+}
+
+.appli-info .name{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.appli-info p{
+    color: rgb(125, 125, 125);
+}
