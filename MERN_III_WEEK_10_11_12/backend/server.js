@@ -1,25 +1,26 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import cookieParser from 'cookie-parser';
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
-import messageRoutes from './routes/messageRoutes.js';
-import connectToMongoDB from './config/db.js';
+import connectDB from "./config/dbConfig.js";
+import contactRoutes from "./routes/contactRoutes.js";
 
-const PORT = process.env.PORT || 3000;
+const app = express();
+const PORT = 3000 || process.env.PORT;
 
 dotenv.config();
 
-const app = express();
-
+// Middleware
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
 // Routes
-app.use('/api/messages', messageRoutes);
+app.use("/api/contact", contactRoutes);
 
+// Start server
 app.listen(PORT, () => {
-    connectToMongoDB();
-    console.log(`Server is running on http://localhost:${PORT}`);
+    connectDB();
+    console.log(`✅ Server is running on http://localhost:${PORT}`);
 });
