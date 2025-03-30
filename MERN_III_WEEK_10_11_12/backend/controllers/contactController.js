@@ -13,6 +13,20 @@ export const sendMessage = async (req , res) => {
     }
 
     try {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); 
+        const tomorrow = new Date(today);
+        tomorrow.setDate(today.getDate() + 1); 
+        
+        const messageCount = await Message.countDocuments({
+            email,
+            createdAt: { $gte: today, $lt: tomorrow },
+        });
+
+        if (messageCount >= 3) {
+            return res.status(429).json({ success: false, message: "Daily message limit reached (3 per day)." });
+        }
+
         // Store in MongoDB
         const newMessage = new Message({ name, email, message });
         await newMessage.save();
