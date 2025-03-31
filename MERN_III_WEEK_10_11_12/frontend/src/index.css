@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+:root {
+    --primary: rgba(55, 0, 149, 0.75);
+    --secondary: rgba(110, 52, 151 , 0.5);
+}
+  
