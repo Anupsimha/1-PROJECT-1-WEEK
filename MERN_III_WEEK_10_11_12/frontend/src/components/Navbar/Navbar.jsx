@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { CiMenuBurger } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { Link , useLocation } from "react-router-dom";
 import { assets } from "../../assets/assets";
 import Sidebar from "./Sidebar"; 
 
 const Navbar = () => {
   const [activeTab, setActiveTab] = useState("Home");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    const path = location.pathname.replace("/", ""); // Get the current route
+    setActiveTab(path ? path.charAt(0).toUpperCase() + path.slice(1) : "Home");
+  }, [location.pathname]); 
 
   return (
     <>
