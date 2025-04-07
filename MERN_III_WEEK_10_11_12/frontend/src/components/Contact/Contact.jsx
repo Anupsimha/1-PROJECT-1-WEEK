@@ -1,75 +1,5 @@
-// import React from 'react';
-// import { FaPaperPlane, FaLinkedin, FaGithub, FaFacebook } from 'react-icons/fa';
-// import { FaSquareXTwitter } from "react-icons/fa6";
-
-// const Contact = () => {
-//   return (
-//     <div className='w-full h-screen -mt-11 flex flex-col justify-center items-start'>
-//       <div className='relative left-6 top-20 w-[97.5%]'>
-//         <p className='text-3xl font-semibold'>
-//           <span className='text-[#E79600]'>Reach</span> Out
-//         </p>
-//         <div className="relative top-1 right-0 w-14 h-0.5 bg-white rounded-b-lg"></div>
-
-//         <div className='flex flex-col items-center justify-center mt-12'>
-
-//           {/* Form Section */}
-//           <div className='w-[75%] bg-purple-700 p-6 rounded-2xl shadow-md'>
-//             <form className='space-y-4 text-white'>
-//               <div className="flex flex-col sm:flex-row gap-4">
-//                 <input
-//                   type="text"
-//                   placeholder='Full Name'
-//                   className='w-full sm:w-1/2 p-3 rounded-md bg-purple-800 border border-purple-500 placeholder-white'
-//                 />
-//                 <input
-//                   type="email"
-//                   placeholder='E-mail'
-//                   className='w-full sm:w-1/2 p-3 rounded-md bg-purple-800 border border-purple-500 placeholder-white'
-//                 />
-//               </div>
-//               <input
-//                 type="text"
-//                 placeholder='Subject'
-//                 className='w-full p-3 rounded-md bg-purple-800 border border-purple-500 placeholder-white'
-//               />
-//               <textarea
-//                 rows="5"
-//                 placeholder='Your Message'
-//                 className='w-full p-3 rounded-md bg-purple-800 border border-purple-500 placeholder-white'
-//               ></textarea>
-//               <div className='flex justify-end'>
-//                 <button
-//                   type='submit'
-//                   className='flex items-center gap-2 bg-[#E79600] hover:bg-yellow-500 text-black px-5 py-2 rounded-md shadow-lg font-semibold'
-//                 >
-//                   <FaPaperPlane /> Send Message
-//                 </button>
-//               </div>
-//             </form>
-//           </div>
-
-//           {/* Social Links Section */}
-//           <div className='w-[75%] mt-8 text-white text-lg flex flex-col sm:flex-row sm:items-center gap-4'>
-//             <p className='text-2xl'>
-//               or <span className='text-[#E79600]'>contact me</span> with...
-//             </p>
-//             <div className='flex gap-8 text-2xl'>
-//               <a href="#" aria-label="Twitter"><FaSquareXTwitter size={40} className='text-black hover:scale-110 transition-transform' /></a>
-//               <a href="#" aria-label="LinkedIn"><FaLinkedin size={40} className='text-[#0A66C2] bg-white rounded-full hover:scale-110 transition-transform' /></a>
-//               <a href="#" aria-label="GitHub"><FaGithub size={40} className='bg-black rounded-full hover:scale-110 transition-transform' /></a>
-//               <a href="#" aria-label="Facebook"><FaFacebook size={40} className='text-[#0A66C2] bg-white rounded-full hover:scale-110 transition-transform' /></a>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Contact;
-
 import React, { useState } from 'react';
+import axios from "axios";
 import { FaPaperPlane, FaLinkedin, FaGithub, FaFacebook } from 'react-icons/fa';
 import { FaSquareXTwitter } from "react-icons/fa6";
 
@@ -82,14 +12,26 @@ const Contact = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false); // Loader state
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: '' }); // Clear error on typing
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
-  const handleSubmit = (e) => {
+  const resetForm = () => {
+    setForm({
+      name: '',
+      email: '',
+      subject: '',
+      message: '',
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const newErrors = {};
     if (!form.name) newErrors.name = "Full Name is required!";
     if (!form.email) newErrors.email = "E-mail is required!";
@@ -98,9 +40,34 @@ const Contact = () => {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-    } else {
-      alert("Message sent successfully!");
-      setForm({ name: '', email: '', subject: '', message: '' });
+      return;
+    }
+
+    setLoading(true); // Start loader
+
+    try {
+      const res = await axios.post("http://localhost:3000/api/contact/send-message", {
+        name: form.name,
+        email: form.email,
+        subject: form.subject,
+        message: form.message,
+      });
+
+      if (res.data.success) {
+        alert("✅ Message sent successfully!");
+        resetForm();
+      } else {
+        alert("⚠️ " + res.data.message);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        alert("🚫 " + error.response.data.message);
+      } else {
+        alert("❌ Something went wrong. Please try again later.");
+        console.error(error);
+      }
+    } finally {
+      setLoading(false); // Stop loader
     }
   };
 
@@ -123,9 +90,10 @@ const Contact = () => {
                     name="name"
                     placeholder='Full Name'
                     value={form.name}
-                    required
+                    onChange={handleChange}
                     className='w-full p-3 rounded-md bg-purple-800 border border-purple-500 placeholder-white'
                   />
+                  {errors.name && <p className="text-red-300 text-sm mt-1">{errors.name}</p>}
                 </div>
                 <div className='w-full sm:w-1/2'>
                   <input
@@ -133,9 +101,10 @@ const Contact = () => {
                     name="email"
                     placeholder='E-mail'
                     value={form.email}
-                    required
+                    onChange={handleChange}
                     className='w-full p-3 rounded-md bg-purple-800 border border-purple-500 placeholder-white'
                   />
+                  {errors.email && <p className="text-red-300 text-sm mt-1">{errors.email}</p>}
                 </div>
               </div>
               <div>
@@ -144,9 +113,10 @@ const Contact = () => {
                   name="subject"
                   placeholder='Subject'
                   value={form.subject}
-                  required
+                  onChange={handleChange}
                   className='w-full p-3 rounded-md bg-purple-800 border border-purple-500 placeholder-white'
                 />
+                {errors.subject && <p className="text-red-300 text-sm mt-1">{errors.subject}</p>}
               </div>
               <div>
                 <textarea
@@ -154,17 +124,29 @@ const Contact = () => {
                   rows="5"
                   placeholder='Your Message'
                   value={form.message}
-                  required
+                  onChange={handleChange}
                   className='w-full p-3 rounded-md bg-purple-800 border border-purple-500 placeholder-white'
                 ></textarea>
+                {errors.message && <p className="text-red-300 text-sm mt-1">{errors.message}</p>}
               </div>
+
+              {/* Loader or Submit button */}
               <div className='flex justify-end'>
-                <button
-                  type='submit'
-                  className='flex items-center gap-2 bg-[#E79600] hover:bg-yellow-500 text-black px-5 py-2 rounded-md shadow-lg font-semibold'
-                >
-                  <FaPaperPlane /> Send Message
-                </button>
+                {loading ? (
+                  <button
+                    disabled
+                    className='flex items-center gap-2 bg-gray-500 text-white px-5 py-2 rounded-md shadow-lg font-semibold animate-pulse'
+                  >
+                    Sending...
+                  </button>
+                ) : (
+                  <button
+                    type='submit'
+                    className='flex items-center gap-2 bg-[#E79600] hover:bg-yellow-500 text-black px-5 py-2 rounded-md shadow-lg font-semibold'
+                  >
+                    <FaPaperPlane /> Send Message
+                  </button>
+                )}
               </div>
             </form>
           </div>
@@ -175,16 +157,16 @@ const Contact = () => {
               or <span className='text-[#E79600]'>contact me</span> with...
             </p>
             <div className='flex gap-8 text-2xl'>
-              <a href="#" aria-label="Twitter"><FaSquareXTwitter size={40} className='text-black hover:scale-110 transition-transform' /></a>
-              <a href="#" aria-label="LinkedIn"><FaLinkedin size={40} className='text-[#0A66C2] bg-white hover:scale-110 transition-transform' /></a>
-              <a href="#" aria-label="GitHub"><FaGithub size={40} className='bg-black rounded-full hover:scale-110 transition-transform' /></a>
-              <a href="#" aria-label="Facebook"><FaFacebook size={40} className='text-[#0A66C2] bg-white rounded-full hover:scale-110 transition-transform' /></a>
+              <a href="https://x.com/AnupSimha4288" target="_blank" aria-label="Twitter" rel="noopener noreferrer"><FaSquareXTwitter size={40} className='text-black hover:scale-110 transition-transform' /></a>
+              <a href="https://www.linkedin.com/in/anupsimha/" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer"><FaLinkedin size={40} className='text-[#0A66C2] bg-white hover:scale-110 transition-transform' /></a>
+              <a href="https://github.com/Anupsimha" target="_blank" aria-label="GitHub" rel="noopener noreferrer"><FaGithub size={40} className='bg-black rounded-full hover:scale-110 transition-transform' /></a>
+              <a href="https://www.facebook.com/profile.php?id=61561064066138&sk=about" target="_blank" aria-label="Facebook" rel="noopener noreferrer"><FaFacebook size={40} className='text-[#0A66C2] bg-white rounded-full hover:scale-110 transition-transform' /></a>
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Contact;

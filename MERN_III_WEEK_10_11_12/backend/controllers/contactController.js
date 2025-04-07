@@ -6,11 +6,15 @@ import Message from "../models/Message.js";
 
 export const sendMessage = async (req , res) => {
 
-    const { name, email, message } = req.body;
+    const { name, email, subject , message } = req.body;
 
-    if (!name || !email || !message) {
+    if (!name || !email || !subject || !message) {
         return res.status(400).json({ success: false, message: "All fields are required!" });
     }
+
+    if (/[\r\n]/.test(subject)) {
+        return res.status(400).json({ success: false, message: "Invalid subject line." });
+    }    
 
     try {
         const today = new Date();
@@ -28,14 +32,14 @@ export const sendMessage = async (req , res) => {
         }
 
         // Store in MongoDB
-        const newMessage = new Message({ name, email, message });
+        const newMessage = new Message({ name, email, subject, message });
         await newMessage.save();
 
         // Send Email
         let mailOptions = {
             from: email,
             to: process.env.EMAIL_USER,
-            subject: `New Contact Form Submission from ${name}`,
+            subject: subject.slice(0, 78),
             text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
         };
 
