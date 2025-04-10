@@ -13,6 +13,11 @@ import stopwatch from './stop-watch.png'
 import todo from './to-do-app.png'
 import weather from './weather-app.png'
 import emailsub from './working-email-subscription-form.png'
+import healthyBowl from './healthy-bowl.png'
+import travel from './travel-o-world.png'
+import cryptoTracking from './crypto-price-tracking-app.png'
+import razorPay from './razor-pay.png'
+import blogWeb from './blog-Website.png'
 
 export const assets = {
     logo,
@@ -30,4 +35,9 @@ export const assets = {
     todo,
     weather,
     emailsub,
+    healthyBowl,
+    travel,
+    cryptoTracking,
+    razorPay,
+    blogWeb,
 }
