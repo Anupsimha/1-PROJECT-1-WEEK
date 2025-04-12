@@ -18,6 +18,10 @@ import travel from './travel-o-world.png'
 import cryptoTracking from './crypto-price-tracking-app.png'
 import razorPay from './razor-pay.png'
 import blogWeb from './blog-Website.png'
+import edusity from './edusity.png'
+import gemini from './gemini.png'
+import evlotion from './evlotion.png'
+import chatify from './chatify.png'
 
 export const assets = {
     logo,
@@ -40,4 +44,8 @@ export const assets = {
     cryptoTracking,
     razorPay,
     blogWeb,
+    edusity,
+    gemini,
+    evlotion,
+    chatify,
 }

@@ -6,6 +6,7 @@ import Resume from "./components/Resume/Resume";
 import About from "./components/About/About";
 import Showcase from "./components/Showcase/Showcase";
 import Contact from "./components/Contact/Contact";
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <div className="fixed top-0 left-0 w-full z-10">
         <Navbar />
         </div>
+        <Toaster position="top-center" reverseOrder={false} />
         <div className="flex-1 p-4">
           <Routes>
             <Route path="/" element={<Home />} />
