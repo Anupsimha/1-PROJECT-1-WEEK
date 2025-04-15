@@ -15,7 +15,7 @@ const projects = [
     name: "Blog Website",
     category: "Backend",
     backgroundImage: `${assets.blogWeb}`,
-    url: "https://blog-website-five-theta.vercel.app/",
+    url: "https://blog-website-zqg3.onrender.com/",
     github: "https://github.com/Anupsimha/blog-website", 
   },
   {
@@ -23,7 +23,7 @@ const projects = [
     name: "Chatify App",
     category: "MERN",
     backgroundImage: `${assets.chatify}`,
-    url: "https://chatify-sand-five.vercel.app/",
+    url: "https://chatify-8ye1.onrender.com/login",
     github: "https://github.com/Anupsimha/chatify", 
   },
   {
@@ -39,7 +39,7 @@ const projects = [
     name: "The Healthy Bowl",
     category: "Frontend",
     backgroundImage: `${assets.healthyBowl}`,
-    url: "https://vercel.com/anupsimha2-gmailcoms-projects/the-healthy-bowl",
+    url: "https://the-healthy-bowl.vercel.app/",
     github: "https://github.com/Anupsimha/The-HEALTHY-BOWL", 
   },
   {

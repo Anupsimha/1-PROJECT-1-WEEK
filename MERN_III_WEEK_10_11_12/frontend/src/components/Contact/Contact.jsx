@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import axios from "axios";
 import { FaPaperPlane, FaLinkedin, FaGithub, FaFacebook } from 'react-icons/fa';
 import { FaSquareXTwitter } from "react-icons/fa6";
+import toast from 'react-hot-toast';
+import axios from "axios";
 
 const Contact = () => {
   const [form, setForm] = useState({
@@ -54,16 +55,16 @@ const Contact = () => {
       });
 
       if (res.data.success) {
-        alert("✅ Message sent successfully!");
+        toast.success("Message sent successfully!");
         resetForm();
       } else {
         alert("⚠️ " + res.data.message);
       }
     } catch (error) {
       if (error.response && error.response.status === 429) {
-        alert("🚫 " + error.response.data.message);
+        toast.error(error.response.data.message);
       } else {
-        alert("❌ Something went wrong. Please try again later.");
+        toast.error("Something went wrong. Please try again later.");
         console.error(error);
       }
     } finally {
@@ -78,7 +79,6 @@ const Contact = () => {
           <span className='text-[#E79600]'>Reach</span> Out
         </p>
         <div className="relative top-1 right-0 w-14 h-0.5 bg-white rounded-b-lg"></div>
-
         <div className='flex flex-col items-center justify-center mt-12'>
           {/* Form Section */}
           <div className='w-[75%] bg-purple-700 p-6 rounded-2xl shadow-md'>
