@@ -8,10 +8,12 @@ const Navbar = () => {
   const [activeTab, setActiveTab] = useState("Home");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  const location = useLocation(); 
+
   useEffect(() => {
-    const path = location.pathname.replace("/", ""); // Get the current route
+    const path = location.pathname.replace("/", "");
     setActiveTab(path ? path.charAt(0).toUpperCase() + path.slice(1) : "Home");
-  }, [location.pathname]); 
+  }, [location]);
 
   return (
     <>

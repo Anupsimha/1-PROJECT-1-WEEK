@@ -1,9 +1,18 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { assets } from '../../assets/assets.js'
 import Button from '../UI/Button.jsx'
 
 const Home = () => {
+
+  const navigate = useNavigate(); 
+
+  const handleNavigate = () => {
+    navigate('/contact'); 
+  };
+
+
   return (
     <div className='w-[100%] -mt-11 flex flex-col justify-center items-center h-screen'>
       <div className='flex items-center justify-center w-[97.5%]'>
@@ -22,7 +31,7 @@ const Home = () => {
         </div>
       </div>
       <div>
-        <Button></Button>
+        <Button onClick={handleNavigate}></Button>
       </div>
       <div className='absolute bottom-2 left-0 w-full flex justify-center items-center'>
         <p>Copyright &copy; 2025 M N Anupsimha</p>

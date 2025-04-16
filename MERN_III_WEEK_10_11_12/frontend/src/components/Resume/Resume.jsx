@@ -52,7 +52,7 @@ const Resume = () => {
             </div>
           </div>  
         </div>
-        <div className='fixed bottom-5 right-12 flex gap-2 z-50'>
+        <div className='fixed bottom-5 right-12 flex gap-2 z-10'>
           {/* Download CV Button */}
           <button
             className="cursor-pointer group relative flex gap-1.5 px-8 py-4 bg-black bg-opacity-80 text-[#f1f1f1] rounded-3xl hover:bg-opacity-70 transition font-semibold shadow-md"
