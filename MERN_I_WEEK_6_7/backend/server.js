@@ -8,7 +8,6 @@ import messageRoutes from './routes/messageRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import connectToMongoDB from "./db/connectToMongoDB.js";
 import { app , server } from './socket/socket.js';
-import exp from "constants";
 
 const PORT = 5000 || process.env.PORT; 
 
