@@ -64,7 +64,6 @@ const CourseDetails = () => {
 
           <div className='pt-8 text-gray-800'>
               <h2 className='text-xl font-semibold'>Course Structure</h2>
-
               <div className='pt-5'>
                 {courseData.courseContent.map((chapter , index) => (
                   <div key={index} className='border border-gray-300 bg-white mb-2 rounded'>
@@ -75,7 +74,6 @@ const CourseDetails = () => {
                       </div>
                     <p className='text-sm md:text-default'>{chapter.chapterContent.length} lectures - {calculateChapterTime(chapter)}</p>
                     </div>
-
                     <div className={`overflow-hidden transition-all duration-300 ${openSections[index] ? 'max-h-96' : 'max-h-0'}`}>
                       <ul className='list-disc md:pl-10 pl-4 pr-4 py-2 text-gray-600 border-t border-gray-300'>
                         {chapter.chapterContent.map((lecture , i) => (
